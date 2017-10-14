@@ -178,28 +178,29 @@ int main()
 	}
 	if(safe)
 	{
-	pid_t pid = fork();
-	add_pid( (int) pid);
-	if (pid < 0 )
-	{
-		printf("Fail fork(): \n");
-		exit(EXIT_FAILURE);
-	}	
-	else if (pid == 0 )
-	{
-	execvp(token[0],token);
-	fflush(NULL);
-	exit (EXIT_SUCCESS);	
+			pid_t pid = fork();
+			add_pid( (int) pid);
+		if (pid < 0 )
+		{
+			printf("Fail fork(): \n");
+			exit(EXIT_FAILURE);
+		}	
+		else if (pid == 0 )
+		{
+			execvp(token[0],token);
+			fflush(NULL);
+			exit (EXIT_SUCCESS);	
 
-	}
+		}
 
-	else{
-	int stat;
-	waitpid(pid, &stat, 0);
-	fflush(NULL);
-	}
+		else
+		{
+			int stat;
+			waitpid(pid, &stat, 0);
+			fflush(NULL);
+		}
 
-	}
+		}
 	
 }
     free( working_root );
